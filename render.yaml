@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: exotel-slack-complete
+    env: python
+    runtime: python-3.11.0
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: SLACK_WEBHOOK_URL
+        sync: false
+      - key: DEEPGRAM_API_KEY
+        sync: false
+      - key: EXOTEL_API_KEY
+        sync: false
+      - key: EXOTEL_API_TOKEN
+        sync: false
+      - key: EXOTEL_SID
+        sync: false
+      - key: SUPPORT_NUMBER
+        value: "09631084471"
+      - key: DATABASE_PATH
+        value: "/opt/render/project/src/processed_calls.db"
+

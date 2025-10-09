@@ -1,0 +1,195 @@
+# ========================================
+# SECURITY - NEVER COMMIT THESE FILES
+# ========================================
+
+# Environment variables (contains API keys and secrets)
+.env
+.env.*
+!env.example
+*.env.local
+*.env.production
+
+# ========================================
+# DATABASE & DATA FILES
+# ========================================
+
+# SQLite databases
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+processed_calls.db
+
+# Data directories
+data/
+*.csv
+*.xlsx
+
+# ========================================
+# AUDIO & MEDIA FILES
+# ========================================
+
+# Downloaded recordings
+downloads/
+downloads/*.mp3
+downloads/*.wav
+downloads/*.m4a
+downloads/*.ogg
+*.mp3
+*.wav
+*.m4a
+
+# ========================================
+# PYTHON
+# ========================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# ========================================
+# IDE & EDITORS
+# ========================================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ========================================
+# OS FILES
+# ========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+
+# ========================================
+# LOGS & TEMP FILES
+# ========================================
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temp files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+# ========================================
+# DEPLOYMENT & BUILD
+# ========================================
+
+# Docker volumes
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# ========================================
+# PROJECT SPECIFIC
+# ========================================
+
+# Test recordings (if you create test files)
+test_recordings/
+samples/
+
+# Personal notes (if you create them)
+notes.txt
+TODO.txt
+personal/
+

@@ -1,0 +1,29 @@
+{
+  "_comment": "Agent mapping configuration - Maps phone numbers to agent details",
+  "_instructions": "Add your agents here with their phone numbers as keys",
+  
+  "09631084471": {
+    "name": "Prateek Raj",
+    "slack_handle": "@prateek.raj",
+    "email": "prateek.raj@company.com",
+    "department": "Customer Success",
+    "team": "Support Team A"
+  },
+  
+  "+919876543210": {
+    "name": "Agent Name",
+    "slack_handle": "@agent.name",
+    "email": "agent@company.com",
+    "department": "Customer Success",
+    "team": "Support Team B"
+  },
+  
+  "_example_add_more": {
+    "name": "Another Agent",
+    "slack_handle": "@another",
+    "email": "another@company.com",
+    "department": "Sales",
+    "team": "Sales Team"
+  }
+}
+
