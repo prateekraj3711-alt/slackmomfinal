@@ -1,29 +1,77 @@
 {
-  "_comment": "Agent mapping configuration - Maps phone numbers to agent details",
-  "_instructions": "Add your agents here with their phone numbers as keys",
+  "_comment": "12 CUSTOMER SUPPORT Agents - Agent mapping by phone number for smart detection",
+  "_instructions": "Phone numbers are normalized (digits only). Email used for Slack tagging. System checks BOTH from_number and to_number against this database.",
   
-  "09631084471": {
-    "name": "Prateek Raj",
-    "slack_handle": "@prateek.raj",
-    "email": "prateek.raj@company.com",
-    "department": "Customer Success",
-    "team": "Support Team A"
+  "7799309499": {
+    "name": "Divya Karlapudi",
+    "email": "divya.karlapudi@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
   },
-  
-  "+919876543210": {
-    "name": "Agent Name",
-    "slack_handle": "@agent.name",
-    "email": "agent@company.com",
-    "department": "Customer Success",
-    "team": "Support Team B"
+  "9311633945": {
+    "name": "Vaibhav Agarwal",
+    "email": "vaibhav.agarwal@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
   },
-  
-  "_example_add_more": {
-    "name": "Another Agent",
-    "slack_handle": "@another",
-    "email": "another@company.com",
-    "department": "Sales",
-    "team": "Sales Team"
+  "8918062860": {
+    "name": "Supriya Chettri",
+    "email": "supriya.chettri@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "7569954922": {
+    "name": "Mohan",
+    "email": "sai.ranga@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "9852338574": {
+    "name": "Md Armaan",
+    "email": "md.armaan@springworks.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "9663175704": {
+    "name": "Ragul A S",
+    "email": "ragul.as@springworks.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "8582962326": {
+    "name": "Ruchi Mishra",
+    "email": "ruchi.mishra@springworks.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "9902352404": {
+    "name": "Mrinalini Krishnan",
+    "email": "mrinalini.krishnan@springworks.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "9330818130": {
+    "name": "Susmita Deb",
+    "email": "susmita.deb@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "8126033006": {
+    "name": "Syed Wali",
+    "email": "syed.wali@springworks.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "9721439156": {
+    "name": "Uttkarsh Tripathi",
+    "email": "uttkarsh.tripathi@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
+  },
+  "8219834257": {
+    "name": "Arsh Ahmed Chauhan",
+    "email": "arsh.chauhan@springverify.in",
+    "department": "CUSTOMER SUPPORT",
+    "team": "Support"
   }
 }
-
