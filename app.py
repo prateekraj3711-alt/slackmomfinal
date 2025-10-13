@@ -40,7 +40,8 @@ app = FastAPI(
 SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 SLACK_BOT_TOKEN = os.environ.get('SLACK_BOT_TOKEN')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-GOOGLE_DRIVE_CREDENTIALS_PATH = os.environ.get('GOOGLE_DRIVE_CREDENTIALS_PATH')
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 EXOTEL_API_KEY = os.environ.get('EXOTEL_API_KEY')
 EXOTEL_API_TOKEN = os.environ.get('EXOTEL_API_TOKEN')
 EXOTEL_SID = os.environ.get('EXOTEL_SID')
@@ -471,8 +472,9 @@ The call was regarding a customer support inquiry. The conversation lasted {len(
 class GoogleDriveService:
     """Upload transcript files to Google Drive for automatic NotebookLM sync"""
     
-    def __init__(self, credentials_path: str = None):
-        self.credentials_path = credentials_path
+    def __init__(self, client_id: str = None, client_secret: str = None):
+        self.client_id = client_id
+        self.client_secret = client_secret
         self.service = None
         self.folder_id = None
         
@@ -499,10 +501,23 @@ class GoogleDriveService:
                 if creds and creds.expired and creds.refresh_token:
                     creds.refresh(Request())
                 else:
-                    if self.credentials_path and os.path.exists(self.credentials_path):
-                        flow = InstalledAppFlow.from_client_secrets_file(
-                            self.credentials_path, SCOPES)
-                        creds = flow.run_local_server(port=0)
+                    if self.client_id and self.client_secret:
+                        from google_auth_oauthlib.flow import Flow
+                        flow = Flow.from_client_config(
+                            {
+                                "web": {
+                                    "client_id": self.client_id,
+                                    "client_secret": self.client_secret,
+                                    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                                    "token_uri": "https://oauth2.googleapis.com/token",
+                                    "redirect_uris": ["http://localhost:8080"]
+                                }
+                            },
+                            SCOPES
+                        )
+                        # For server deployment, we'll use a different approach
+                        logger.warning("Google Drive OAuth requires manual setup - using local file fallback")
+                        return False
                     else:
                         logger.warning("Google Drive credentials not found - file upload disabled")
                         return False
@@ -999,7 +1014,7 @@ class SlackFormatter:
 # Initialize services
 transcription_service = TranscriptionService(OPENAI_API_KEY) if OPENAI_API_KEY else None
 mom_generator = MOMGenerator(OPENAI_API_KEY) if OPENAI_API_KEY else None
-google_drive_service = GoogleDriveService(GOOGLE_DRIVE_CREDENTIALS_PATH) if GOOGLE_DRIVE_CREDENTIALS_PATH else None
+google_drive_service = GoogleDriveService(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET) if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET else None
 
 
 # Background processing with threading semaphore
@@ -1135,7 +1150,7 @@ async def health_check():
         "services": {
             "transcription": "enabled (OpenAI Whisper)" if transcription_service else "disabled",
             "mom_generator": "enabled" if mom_generator else "disabled",
-            "google_drive": "enabled" if google_drive_service else "disabled (set GOOGLE_DRIVE_CREDENTIALS_PATH)",
+            "google_drive": "enabled" if google_drive_service else "disabled (set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET)",
             "slack": "enabled" if SLACK_WEBHOOK_URL else "disabled",
             "slack_user_lookup": "enabled" if slack_user_lookup else "disabled (set SLACK_BOT_TOKEN)",
             "agent_database": f"{len(AGENT_MAPPING)} agents loaded"
@@ -1300,7 +1315,7 @@ async def startup_event():
     logger.info(f"Agent Database: {len(AGENT_MAPPING)} agents loaded")
     logger.info(f"Transcription: {'Enabled (OpenAI Whisper)' if transcription_service else 'Disabled'}")
     logger.info(f"MOM Generator: {'Enabled' if mom_generator else 'Disabled'}")
-    logger.info(f"Google Drive: {'Enabled' if google_drive_service else 'Disabled (set GOOGLE_DRIVE_CREDENTIALS_PATH)'}")
+    logger.info(f"Google Drive: {'Enabled' if google_drive_service else 'Disabled (set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET)'}")
     logger.info(f"Slack: {'Enabled' if SLACK_WEBHOOK_URL else 'Disabled'}")
     logger.info(f"Slack User Lookup: {'Enabled' if slack_user_lookup else 'Disabled (set SLACK_BOT_TOKEN)'}")
     logger.info(f"Support Number: {SUPPORT_NUMBER}")
